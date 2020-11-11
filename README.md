@@ -1,3 +1,9 @@
+1. [What's Covered in this Document](#What's-Covered-in-this-Document)
+1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
+1. [Install Server Dependencies](#Install-Server-Dependencies)
+
+TODO...
+
 # What's Covered in this Document
 Everything involved in publishing a django website equipped with WebSockets using Django Channels. 
 
@@ -19,15 +25,8 @@ I use [Digital Ocean](https://m.do.co/c/c87161ed324c) as the hosting provider. T
     1. Configuring systemd to execute bash script on server boot
 1. HTTPS with [letsencrypt](https://letsencrypt.org/)
 
-## Legend
-1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
-1. [Install Server Dependencies](#Install-Server-Dependencies)
 
-
-
-# Create Droplet with SSH login
-Digital ocean can generate an SSH key for you automatically or you can do it yourself. It doesn't matter. Just make sure you save the SSH key to you computer somewhere you won't lose it. And make a backup because if you lose it you will not be able to get into your server again.
-
+# Create Digital Ocean Droplet with SSH login
 
 #### Create a new droplet
 <div class="row  justify-content-center">
@@ -70,7 +69,7 @@ Write down your server ip somewhere. You'll need this for logging into your serv
 <br>
 
 # Log into Droplet with SSH and FTP
-Personall I like to use [MobaXterm](https://mobaxterm.mobatek.net/) (it's free) to log into my servers. It's great because you can SSH and FTP from the same window. It's just convenient. 
+Personally I like to use [MobaXterm](https://mobaxterm.mobatek.net/) (it's free) to log into my servers. It's great because you can SSH and FTP from the same window. It's very convenient. 
 
 #### Create a new session
 <div class="row  justify-content-center">
@@ -123,6 +122,7 @@ Run these commands in the SSH terminal.
 `ALTER ROLE django SET timezone TO 'UTC';`
 
 `GRANT ALL PRIVILEGES ON DATABASE django_db TO django;`
+
 `\q`
 
 `sudo -H pip3 install --upgrade pip`
@@ -131,7 +131,7 @@ Run these commands in the SSH terminal.
 
 `sudo apt install git-all`
 
-`sudo apt install libgl1-mesa-glx` # cv2 issue
+`sudo apt install libgl1-mesa-glx` Resolve cv2 issue
 
 `adduser django`
 
@@ -139,7 +139,7 @@ Run these commands in the SSH terminal.
 
 `cd /home/django/`
 
-`mkdir CodingWithMitchChat`
+`mkdir CodingWithMitchChat` You can replace "CodingWithMitchChat" with your project name. 
 
 `cd CodingWithMitchChat`
 
@@ -153,29 +153,29 @@ Run these commands in the SSH terminal.
 # Publish your Project to Github
 1. Log into Github.com
 1. Create a new repository [https://github.com/new](https://github.com/new)
-1. Open a cmd prompt to your local project directory. Ex: `D:\DjangoProjects\ChatServerPlayground\venv\src`
+1. Open a cmd prompt to your local project directory. 
+  - Ex: `D:\DjangoProjects\ChatServerPlayground\venv\src`
 1. `git init`
 1. Update gitignore. I suggest copying mine: [https://github.com/mitchtabian/Codingwithmitch-Chat/blob/master/.gitignore](https://github.com/mitchtabian/Codingwithmitch-Chat/blob/master/.gitignore)
 1. `git add .`
 1. `git commit -m "first commit"`
-1. `git remote add origin https://github.com/mitchtabian/testoinggfmdgmdfk.git`
+1. `git remote add origin https://github.com/mitchtabian/testoinggfmdgmdfk.git` Replace with your git project url.
 1. `git push -u origin master`
 
 #### Create a "production" branch
-The production branch requires different settings. Things like static files will be served from AWS via 'Digital Ocean Spaces'. So our static file configuration completely changes.
+The production branch requires different settings. For example things like static files will be served from AWS via 'Digital Ocean Spaces'. So our static file configuration completely changes compared to development. 
+
+Because of this, I recommend maintaining a "prod" branch. We will deploy the prod branch to the server.
 
 ```git
-// Checkout master
 git checkout master
 ```
 
 ```git
-// Create the new "production" branch
 git checkout -b prod
 ```
 
 ```git
-// push new branch to remote
 git push origin prod
 ```
 
@@ -183,10 +183,10 @@ We will come back to the `prod` branch and make changes to it before we publish.
 
 
 # Hosting Static Files with Digital Ocean Spaces
-1. Create a new digital ocean project named "open-chat-demo"
-1. Create new Digital Ocean Space with the name "open-chat-dev" or whatever: [https://cloud.digitalocean.com/spaces](https://cloud.digitalocean.com/spaces)
+1. Create new Digital Ocean Space with the name "open-chat-dev"
+  - [https://cloud.digitalocean.com/spaces](https://cloud.digitalocean.com/spaces)
 1. Create a API key here [https://cloud.digitalocean.com/account/api/tokens](https://cloud.digitalocean.com/account/api/tokens)
-1. create a folder inside the space and call it "open-chat-static"
+1. Create a folder inside the space and call it "open-chat-static" 
 
 ## Update 'prod' branch
 Make the necessary changes to the prod branch.
@@ -279,7 +279,7 @@ var ws_path = ws_scheme + '://' + window.location.host + ":8001/"; // PRODUCTION
     - Leave the `__init__.py` file. Just delete any other migrations.
 
 #### Update requirements.txt
-Make sure to copy my requirements.txt file so you have all the necessary dependencies: (requirements.txt)[https://github.com/mitchtabian/Codingwithmitch-Chat/blob/prod/requirements.txt].
+Make sure to copy my requirements.txt file so you have all the necessary dependencies: [requirements.txt](https://github.com/mitchtabian/Codingwithmitch-Chat/blob/prod/requirements.txt).
 
 This requirements.txt file has some extra dependencies that we didn't have in development. They can all be installed manually using pip but I added them to `requirements.txt` so you wouldn't have to. This is what was added:
 1. `gunicorn psycopg2-binary` (required for postgres)
@@ -320,7 +320,7 @@ Open MobaXterm and log into your server via SSH.
 
 `python manage.py collectstatic`
 
-**At this point you can check in the Digital Ocean spaces console and you should see the static files have been places there.**
+**At this point you can check in the Digital Ocean spaces console and you should see the static files have been placed there.**
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/after_collect_static.PNG">
 </div>
@@ -350,7 +350,7 @@ visit [http://<your_ip_address>:8000/](http://<your_ip_address>:8000/)
 
 
 # Creating systemd Socket and Service Files for Gunicorn
-We've tested to see if the application will run if we run the server manually, but this isn't how we want it to be running. We want the application to run in a service so it automatically starts/restarts when it needs to. Like when we restart the server or it goes down for some reason.
+We've tested to see if the application will run if we run the app manually, but this isn't how we want it to be running. We want the application to run in a service so it automatically starts/restarts when it needs to. Like when we restart the server or it goes down for some reason.
 
 One way you can do this is with gunicorn. Run this command you'll see that gunicorn can run the application:
 ```
@@ -424,9 +424,9 @@ WantedBy=multi-user.target
 #### Configure Nginx to Proxy Pass to Gunicorn
 We'll be using Nginx as an HTTP Proxy. It helps to protect our website from attackers. You can read more about it here [https://docs.gunicorn.org/en/stable/deploy.html](https://docs.gunicorn.org/en/stable/deploy.html). We need to configure Nginx and gunicorn to work together.
 
-`cd /etc/nginx/sites-available`
+Navigate to `/etc/nginx/sites-available`
 
-Create file CodingWithMitchChat
+Create file `CodingWithMitchChat`
 ```
 server {
     server_name <your_ip_address>;
@@ -446,7 +446,7 @@ server {
 ```
 
 
-Update Nginx config file at /etc/nginx/nginx.conf so we can upload large files (images)
+Update Nginx config file at `/etc/nginx/nginx.conf` so we can upload large files (images)
 ```
 http{
 	...
@@ -489,6 +489,8 @@ Here are some commands you can use to look at the server logs. **These commands 
 
 
 # Install and Setup Redis
+Redis is used as a kind of "messaging queue" for django channels. Read more about it here [https://channels.readthedocs.io/en/stable/topics/channel_layers.html?highlight=redis#redis-channel-layer](https://channels.readthedocs.io/en/stable/topics/channel_layers.html?highlight=redis#redis-channel-layer)
+
 `sudo apt install redis-server`
 
 Navigate to `/etc/redis/`
@@ -533,6 +535,7 @@ From the Django channels docs:
 create `asgi.py` in `/home/django/CodingWithMitchChat/src/CodingWithMitchChat` with this command:
 
 'django' must be the owner of this file.
+
 `cat > asgi.py` 
 
 Paste in the following:
@@ -562,7 +565,7 @@ You can open the file to confirm everything looks good.
 <br>
 
 # Deploying Django Channels with Daphne & Systemd
-Gunicorn is what we use to run the WSGI application - which is our django app. To run the ASGI application we need something else, an additional tool. Daphne was built for Django channels and is the simplest. We can start daphne using a systemd service when the server boots, just like we start gunicorn and then gunicorn starts the django app.
+Gunicorn is what we use to run the WSGI application - which is our django app. To run the ASGI application we need something else, an additional tool. **[Daphne](https://github.com/django/daphne)** was built for Django channels and is the simplest. We can start daphne using a systemd service when the server boots, just like we start gunicorn and then gunicorn starts the django app.
 
 Here are some references I found helpful. The information on this is scarce:
 1. [https://channels.readthedocs.io/en/latest/deploying.html](https://channels.readthedocs.io/en/latest/deploying.html)
@@ -601,7 +604,7 @@ WantedBy=multi-user.target
 
 You should see something like this. If you don't, go back and redo this section. Check that your filepaths are all **exactly the same as mine in `daphne.service`**. That is the #1 reason people have issues.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphne_status.PNG">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphe_status.PNG">
 </div>
 <br>
 
@@ -622,7 +625,7 @@ Save and close.
 Might have to enable it to be run as a script (not sure if this is needed)
 `chmod u+x /root/boot.sh`
 
-You can read more about shell scripting on your own time. Here is something I found to be helpful:
+If you want to read more about shell scripting, I found this helpful:
 [https://ostechnix.com/fix-exec-format-error-when-running-scripts-with-run-parts-command/](https://ostechnix.com/fix-exec-format-error-when-running-scripts-with-run-parts-command/).
 
 
@@ -642,15 +645,19 @@ Save and close.
 
 `systemctl daemon-reload`
 
-`sudo systemctl start on_boot` Start it
+##### Start it
+`sudo systemctl start on_boot` 
 
-`sudo systemctl enable on_boot` Enable it to run at boot
+##### Enable it to run at boot
+`sudo systemctl enable on_boot` 
 
-`ufw allow 8001` Allow daphne service through firewall
+##### Allow daphne service through firewall
+`ufw allow 8001` 
 
+##### Restart the server
 `sudo shutdown -r now`
 
-Check the status of `on_boot.service`.
+##### Check the status of `on_boot.service`
 `systemctl status on_boot.service`
 
 Should see this. If not, check logs: `sudo journalctl -u on_boot.service`
@@ -659,12 +666,12 @@ Should see this. If not, check logs: `sudo journalctl -u on_boot.service`
 </div>
 <br>
 
-Check if the daphne service started when the server started:
+##### Check if the daphne service started when the server started:
 `systemctl status daphne.service`
 
 Should see this. If not, check logs: `sudo journalctl -u daphne.service`
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphe_service_status.PNG">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphne_service_status.PNG">
 </div>
 <br>
 
@@ -754,8 +761,17 @@ It can take some time to see your website available at the custom domain. I don'
 
 
 # HTTPS (If you have a domain registered and it's working)
-**Do not do this step unless you're able to visit your website using the custom domain.** For example visiting http://open-chat-demo.xyz/.
+**Do not do this step unless you're able to visit your website using the custom domain.**
 
+For example visiting http://open-chat-demo.xyz/.
+
+Visiting your domain you should see this
+<div class="row  justify-content-center">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/welcome_to_nginx.PNG">
+</div>
+<br>
+
+#### Install certbot
 HTTPS is a little more difficult to set up when using Django Channels. Nginx and Daphne require some extra configuring.
 
 `sudo apt install certbot python3-certbot-nginx`
