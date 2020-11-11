@@ -1,8 +1,8 @@
 1. [What's Covered in this Document](#What's-Covered-in-this-Document)
 1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
 1. [Install Server Dependencies](#Install-Server-Dependencies)
-
-TODO...
+1. ...
+**TODO...**
 
 # What's Covered in this Document
 Everything involved in publishing a django website equipped with WebSockets using Django Channels. 
@@ -764,14 +764,14 @@ Apply the changes
 It can take some time to see your website available at the custom domain. I don't really know how long this will actually take. I waited about an hour and it was working for me.
 
 #### How do you know it's working?
-Visiting your domain you should see this OR you should see your project live and working.
+Visiting your domain you should see this **OR you should see your project live and working**.
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/welcome_to_nginx.PNG">
 </div>
 <br>
 
 # HTTPS (If you have a domain registered and it's working)
-**Do not do this step unless you're able to visit your website using the custom domain.** See [How do you know it's working?](How-do-you-know-it's-working?)
+**Do not do this step unless you're able to visit your website using the custom domain.** See [How do you know it's working?](How-do-you-know-its-working?)
 
 #### Install certbot
 HTTPS is a little more difficult to set up when using Django Channels. Nginx and Daphne require some extra configuring.
