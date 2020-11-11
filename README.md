@@ -1,3 +1,9 @@
+<style type="text/css">
+  img {
+    max-height: 400px;
+  }
+</style>
+
 # What's Covered in this Document
 Everything involved in publishing a django website equipped with WebSockets using Django Channels. 
 
