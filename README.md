@@ -25,9 +25,7 @@ Digital ocean can generate an SSH key for you automatically or you can do it you
 
 
 #### Create a new droplet
-<div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/create_droplet.png">
-</div>
+<img class='header-img' src='https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/create_droplet.png' />
 <br>
 
 I'm choosing the most basic/minimal settings.
