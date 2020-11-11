@@ -3,7 +3,7 @@ Everything involved in publishing a django website equipped with WebSockets usin
 
 I use [Digital Ocean](https://m.do.co/c/c87161ed324c) as the hosting provider. They have amazing products, documentation and customer support. I highly recommend them. Get $100 free with this referral link: [Get $100 Free some Digital Ocean](https://m.do.co/c/c87161ed324c).
 
-#### Details
+## Specifications
 1. Ubuntu 20.04
 1. PostgreSQL
 1. Django Channels 2
@@ -19,6 +19,11 @@ I use [Digital Ocean](https://m.do.co/c/c87161ed324c) as the hosting provider. T
     1. Configuring systemd to execute bash script on server boot
 1. HTTPS with [letsencrypt](https://letsencrypt.org/)
 
+## Legend
+1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
+1. [Install Server Dependencies](#Install-Server-Dependencies)
+
+
 
 # Create Droplet with SSH login
 Digital ocean can generate an SSH key for you automatically or you can do it yourself. It doesn't matter. Just make sure you save the SSH key to you computer somewhere you won't lose it. And make a backup because if you lose it you will not be able to get into your server again.
@@ -30,7 +35,7 @@ Digital ocean can generate an SSH key for you automatically or you can do it you
 </div>
 <br>
 
-I'm choosing the most basic/minimal settings.
+#### Droplet configuration
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_1.PNG">
 </div>
@@ -39,21 +44,26 @@ I'm choosing the most basic/minimal settings.
 </div>
 <br>
 
+
+#### SSH key
 Make sure to choose the SSH key option for authentication. Otherwise hackers can simply try passwords to log into your server. This is very bad. Using an SSH key is much, much more secure.
 
 To create an SSH key just click the button "New SSH key" and follow the instructions. **Make sure to save a backup of the private key and public key**. I usually save on an external drive along with on my PC.
+
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_ssh.PNG">
 </div>
 <br>
 
-Finish up
+#### Finish up
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_3.PNG">
 </div>
 <br>
 
+#### Your IP
 Write down your server ip somewhere. You'll need this for logging into your server.
+
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/server_ip.PNG">
 </div>
@@ -62,18 +72,19 @@ Write down your server ip somewhere. You'll need this for logging into your serv
 # Log into Droplet with SSH and FTP
 Personall I like to use [MobaXterm](https://mobaxterm.mobatek.net/) (it's free) to log into my servers. It's great because you can SSH and FTP from the same window. It's just convenient. 
 
-Create a new session
+#### Create a new session
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/mobaxterm_session.PNG">
 </div>
 <br>
 
-Choose SSH
+#### Choose SSH
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/ssh_session.PNG">
 </div>
 <br>
 
+#### SSH Settings
 1. Set the server ip
 1. set "root" as username
 1. Under "Advanced SSH settings":
@@ -83,13 +94,14 @@ Choose SSH
 </div>
 <br>
 
+#### Connected
 Now connect and it should look like this. There's an FTP on the left and SSH on the right.
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/logged_in.PNG">
 </div>
 <br>
 
-# Install Dependencies
+# Install Server Dependencies
 Run these commands in the SSH terminal.
 
 `passwd` Set password for root. I'm not sure what the default is.
