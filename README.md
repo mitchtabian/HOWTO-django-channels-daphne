@@ -1,9 +1,3 @@
-<style type="text/css">
-  img {
-    max-height: 400px;
-  }
-</style>
-
 # What's Covered in this Document
 Everything involved in publishing a django website equipped with WebSockets using Django Channels. 
 
@@ -31,8 +25,7 @@ Digital ocean can generate an SSH key for you automatically or you can do it you
 
 
 #### Create a new droplet
-
-<img src='https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/create_droplet.PNG' style="height: 300;" />
+![](https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/create_droplet.PNG =250x250)
 <br>
 
 I'm choosing the most basic/minimal settings.
