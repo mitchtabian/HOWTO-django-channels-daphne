@@ -184,7 +184,7 @@ We will come back to the `prod` branch and make changes to it before we publish.
 
 # Hosting Static Files with Digital Ocean Spaces
 1. Create new Digital Ocean Space with the name "open-chat-dev"
-  - [https://cloud.digitalocean.com/spaces](https://cloud.digitalocean.com/spaces)
+    - [https://cloud.digitalocean.com/spaces](https://cloud.digitalocean.com/spaces)
 1. Create a API key here [https://cloud.digitalocean.com/account/api/tokens](https://cloud.digitalocean.com/account/api/tokens)
 1. Create a folder inside the space and call it "open-chat-static" 
 
@@ -279,9 +279,9 @@ var ws_path = ws_scheme + '://' + window.location.host + ":8001/"; // PRODUCTION
     - Leave the `__init__.py` file. Just delete any other migrations.
 
 #### Update requirements.txt
-Make sure to copy my requirements.txt file so you have all the necessary dependencies: [requirements.txt](https://github.com/mitchtabian/Codingwithmitch-Chat/blob/prod/requirements.txt).
+Make sure to copy my `requirements.txt` file so you have all the necessary dependencies: [requirements.txt](https://github.com/mitchtabian/Codingwithmitch-Chat/blob/prod/requirements.txt).
 
-This requirements.txt file has some extra dependencies that we didn't have in development. They can all be installed manually using pip but I added them to `requirements.txt` so you wouldn't have to. This is what was added:
+This `requirements.txt` file has some extra dependencies that we didn't have in development. They can all be installed manually using pip but I added them to `requirements.txt` so you wouldn't have to. This is what was added:
 1. `gunicorn psycopg2-binary` (required for postgres)
 1. `django-storages` (required for Digital ocean spaces)
 1. `boto3` (required for Digital ocean spaces)
@@ -312,7 +312,7 @@ Open MobaXterm and log into your server via SSH.
 
 `git init`
 
-`git pull https://github.com/mitchtabian/Codingwithmitch-Chat.git`
+`git pull https://github.com/mitchtabian/Codingwithmitch-Chat.git` **Or whatever your git url is**
 
 `git pull origin prod`
 
@@ -408,6 +408,7 @@ WantedBy=multi-user.target
 ```
 
 `sudo systemctl start gunicorn.socket`
+
 `sudo systemctl enable gunicorn.socket`
 
 
@@ -515,12 +516,10 @@ Should see this:
 
 `CTRL+C` to exit.
 
-Make sure Redis can be accessed through "localhost" or in otherwords "127.0.0.1".
-`CTRL+F` to find 'bind 127.0.0.1'
-
 `sudo apt install net-tools`
 
 Confirm Redis is running at 127.0.0.1. Port should be 6379 by default.
+
 `sudo netstat -lnp | grep redis`
 
 `sudo systemctl restart redis.service`
@@ -532,11 +531,9 @@ From the Django channels docs:
 
 `su django`
 
-create `asgi.py` in `/home/django/CodingWithMitchChat/src/CodingWithMitchChat` with this command:
+Create file named `asgi.py` in `/home/django/CodingWithMitchChat/src/CodingWithMitchChat` with this command:
 
-'django' must be the owner of this file.
-
-`cat > asgi.py` 
+`cat > asgi.py` 'django' must be the owner of this file.
 
 Paste in the following:
 ```
@@ -600,13 +597,13 @@ WantedBy=multi-user.target
 
 `systemctl status daphne.service`
 
-`CTRL+C`
-
 You should see something like this. If you don't, go back and redo this section. Check that your filepaths are all **exactly the same as mine in `daphne.service`**. That is the #1 reason people have issues.
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphe_status.PNG">
 </div>
 <br>
+
+`CTRL+C`
 
 # Starting the daphne Service when Server boots
 With gunicorn and the WSGI application, we created a `gunicorn.socket` file that tells gunicorn to start when the server boots (at least this is my understanding). I couldn't figure out how to get this to work for daphne so instead I wrote a bash script that will run when the server boots. 
@@ -747,29 +744,34 @@ server {
 `sudo systemctl reload nginx`
 
 Make sure nginx configuration is still good.
+
+`sudo nginx -t`
+
+#### Update `ALLOWED_HOSTS`
+
+Navigate to `/home/django/CodingWithMitchChat/src/CodingWithMitchChat/`
+
+Update `settings.py` with the domain you purchased. Also make sure your ip is correct.
 ```
-sudo nginx -t
+ALLOWED_HOSTS = ["157.245.134.6", "open-chat-demo.xyz", "www.open-chat-demo.xyz"]
 ```
 
-#### Wait...
-It can take some time to see your website available at the custom domain. I don't really know how long this will actually take. Namecheap says up to 48 hours but I don't think I've ever waited longer than a day.
+Apply the changes
 
+`service gunicorn restart`
 
-##########################################################
-#### CONTINUE
-##########################################################
+## TIME TO WAIT...
+It can take some time to see your website available at the custom domain. I don't really know how long this will actually take. I waited about an hour and it was working for me.
 
-
-# HTTPS (If you have a domain registered and it's working)
-**Do not do this step unless you're able to visit your website using the custom domain.**
-
-For example visiting http://open-chat-demo.xyz/.
-
-Visiting your domain you should see this
+#### How do you know it's working?
+Visiting your domain you should see this OR you should see your project live and working.
 <div class="row  justify-content-center">
   <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/welcome_to_nginx.PNG">
 </div>
 <br>
+
+# HTTPS (If you have a domain registered and it's working)
+**Do not do this step unless you're able to visit your website using the custom domain.** See [How do you know it's working?](How-do-you-know-it's-working?)
 
 #### Install certbot
 HTTPS is a little more difficult to set up when using Django Channels. Nginx and Daphne require some extra configuring.
