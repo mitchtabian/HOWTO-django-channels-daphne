@@ -32,10 +32,10 @@ Digital ocean can generate an SSH key for you automatically or you can do it you
 
 I'm choosing the most basic/minimal settings.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_1.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_1.PNG">
 </div>
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_2.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_2.PNG">
 </div>
 <br>
 
@@ -43,19 +43,19 @@ Make sure to choose the SSH key option for authentication. Otherwise hackers can
 
 To create an SSH key just click the button "New SSH key" and follow the instructions. **Make sure to save a backup of the private key and public key**. I usually save on an external drive along with on my PC.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_ssh.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_ssh.PNG">
 </div>
 <br>
 
 Finish up
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_3.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/digital_ocean_droplet_3.PNG">
 </div>
 <br>
 
 Write down your server ip somewhere. You'll need this for logging into your server.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/server_ip.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/server_ip.PNG">
 </div>
 <br>
 
@@ -64,13 +64,13 @@ Personall I like to use [MobaXterm](https://mobaxterm.mobatek.net/) (it's free) 
 
 Create a new session
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/mobaxterm_session.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/mobaxterm_session.PNG">
 </div>
 <br>
 
 Choose SSH
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/ssh_session.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/ssh_session.PNG">
 </div>
 <br>
 
@@ -79,13 +79,13 @@ Choose SSH
 1. Under "Advanced SSH settings":
     1. click "use private key" and choose the location of where you saved your private key.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/session_settings.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/session_settings.PNG">
 </div>
 <br>
 
 Now connect and it should look like this. There's an FTP on the left and SSH on the right.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/logged_in.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/logged_in.PNG">
 </div>
 <br>
 
@@ -310,7 +310,7 @@ Open MobaXterm and log into your server via SSH.
 
 **At this point you can check in the Digital Ocean spaces console and you should see the static files have been places there.**
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/after_collect_static.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/after_collect_static.PNG">
 </div>
 <br>
 
@@ -495,7 +495,7 @@ change 'supervised no' to 'supervised systemd'
 
 Should see this:
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/redis_status.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/redis_status.PNG">
 </div>
 <br>
 
@@ -545,7 +545,7 @@ You can open the file to confirm everything looks good.
 
 `ls -l` to check ownership. `django` needs to be the owner.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CodingWithMitchChat_ownership.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CodingWithMitchChat_ownership.PNG">
 </div>
 <br>
 
@@ -589,7 +589,7 @@ WantedBy=multi-user.target
 
 You should see something like this. If you don't, go back and redo this section. Check that your filepaths are all **exactly the same as mine in `daphne.service`**. That is the #1 reason people have issues.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphne_status.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphne_status.PNG">
 </div>
 <br>
 
@@ -643,7 +643,7 @@ Check the status of `on_boot.service`.
 
 Should see this. If not, check logs: `sudo journalctl -u on_boot.service`
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/on_boot_service_status.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/on_boot_service_status.PNG">
 </div>
 <br>
 
@@ -652,7 +652,7 @@ Check if the daphne service started when the server started:
 
 Should see this. If not, check logs: `sudo journalctl -u daphne.service`
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphe_service_status.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/daphe_service_status.PNG">
 </div>
 <br>
 
@@ -673,13 +673,13 @@ I like to use [namecheap.com](https://www.namecheap.com/) but it doesn't matter 
 
 On the home screen, click the "manage" button on the domain you purchased.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/namecheap_home.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/namecheap_home.PNG">
 </div>
 <br>
 
 In the "nameservers" section, select "custom DNS" and point to digital ocean.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/nameservers.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/nameservers.PNG">
 </div>
 <br>
 
@@ -687,19 +687,19 @@ In the "nameservers" section, select "custom DNS" and point to digital ocean.
 
 Select your project in digital ocean and click "add domain" on the right.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/add_a_domain.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/add_a_domain.PNG">
 </div>
 <br>
 
 Fill in your domain name.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/add_a_domain_1.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/add_a_domain_1.PNG">
 </div>
 <br>
 
 Add the following DNS records. Replace `open-chat.xyx` with your domain name. And you can ignore the CDN.
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/dns_records.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/dns_records.PNG">
 </div>
 <br>
 
@@ -781,7 +781,7 @@ sudo certbot --nginx -d open-chat-demo.xyz -d www.open-chat-demo.xyz
 #### Update CORS in digital ocean
 Update for HTTPS in spaces settings
 <div class="row  justify-content-center">
-  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.png">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.PNG">
 </div>
 <br>
 
@@ -853,7 +853,7 @@ WantedBy=multi-user.target
 #### CORS issue?
 error in web console "No 'Access-Control-Allow-Origin' header is present on the requested resource"
 Fix this by adding CORS header in spaces settings.
-See `https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.png`
+See `https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.PNG`
 
 
 # FAQ
