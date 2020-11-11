@@ -153,8 +153,8 @@ Run these commands in the SSH terminal.
 # Publish your Project to Github
 1. Log into Github.com
 1. Create a new repository [https://github.com/new](https://github.com/new)
-1. Open a cmd prompt to your local project directory. 
-  - Ex: `D:\DjangoProjects\ChatServerPlayground\venv\src`
+1. Open a cmd prompt to your local project directory
+    - Ex: `D:\DjangoProjects\ChatServerPlayground\venv\src`
 1. `git init`
 1. Update gitignore. I suggest copying mine: [https://github.com/mitchtabian/Codingwithmitch-Chat/blob/master/.gitignore](https://github.com/mitchtabian/Codingwithmitch-Chat/blob/master/.gitignore)
 1. `git add .`
