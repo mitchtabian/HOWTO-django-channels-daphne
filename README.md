@@ -294,6 +294,7 @@ PROJECT_NAME=CodingWithMitchChat
 
 
 #### Update header.html
+The WebSockets will be communicating through port 8001 (we will configure this later). So make sure in all the Javascript WebSockets you are referencing port 8001.
 ```javascript
 var ws_path = ws_scheme + '://' + window.location.host + ":8001/"; // PRODUCTION
 ````
