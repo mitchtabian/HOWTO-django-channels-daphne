@@ -1,5 +1,5 @@
 1. [What's Covered in this Document](#Whats-Covered-in-this-Document)
-1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
+1. [Create Digital Ocean Droplet with SSH login](#Create-Digital-Ocean-Droplet-with-SSH-login)
 1. [Install Server Dependencies](#Install-Server-Dependencies)
 1. [Publish your Project to Github](#Publish-your-Project-to-Github)
 1. [Hosting Static Files with Digital Ocean Spaces](#Hosting-Static-Files-with-Digital-Ocean-Spaces)
