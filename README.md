@@ -1,8 +1,20 @@
-1. [What's Covered in this Document](#What's-Covered-in-this-Document)
+1. [What's Covered in this Document](#Whats-Covered-in-this-Document)
 1. [Create Droplet with SSH login](#Create-Droplet-with-SSH-login)
 1. [Install Server Dependencies](#Install-Server-Dependencies)
-1. ...
-**TODO...**
+1. [Publish your Project to Github](#Publish-your-Project-to-Github)
+1. [Hosting Static Files with Digital Ocean Spaces](#Hosting-Static-Files-with-Digital-Ocean-Spaces)
+1. [Creating systemd Socket and Service Files for Gunicorn](#Creating-systemd-Socket-and-Service-Files-for-Gunicorn)
+1. [DEBUGGING](#DEBUGGING)
+1. [Install and Setup Redis](#Install-and-Setup-Redis)
+1. [ASGI for Hosting Django Channels as a Separate Application](ASGI-for-Hosting-Django-Channels-as-a-Separate-Application)
+1. [Deploying Django Channels with Daphne & Systemd](#Deploying-Django-Channels-with-Daphne-&-Systemd)
+1. [Starting the daphne Service when Server boots](#Starting-the-daphne-Service-when-Server-boots)
+1. [Domain Setup](#Domain-Setup)
+1. [Create a superuser](#Create-a-superuser)
+1. [Finishing up](#Finishing-up)
+1. [FAQ](#FAQ)
+1. [References](#References)
+
 
 # What's Covered in this Document
 Everything involved in publishing a django website equipped with WebSockets using Django Channels. 
