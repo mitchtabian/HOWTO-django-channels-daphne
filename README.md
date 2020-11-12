@@ -340,6 +340,53 @@ This `requirements.txt` file has some extra dependencies that we didn't have in 
 1. `python-decouple` (required for settings.ini file)
 
 
+#### A Problem with how Django interprets static files in javascript
+This is a weird thing that happens if you set static files in javascript with django. HTML symbols get tranlated into their respective code. 
+
+Example
+```
+& becomes &amp;
+
+Therefore 
+
+https://<some-domain>/&Signature=3454v535435
+
+Becomes
+
+https://<some-domain>/&amp;Signature=3454v535435
+```
+
+This is a problem because the image will not load if the `&` symbol becomes`&amp;`. So we need need to fix a couple files for production.
+
+##### `public_chat.html`
+Change 
+```javascript
+profileImage.src = "{% static 'codingwithmitch/dummy_image.png' %}"
+```
+To
+```javascript
+profileImage.src = "{% static 'codingwithmitch/dummy_image.png' %}".replace(/&amp;/g, "&")
+```
+
+`.replace(/&amp;/g, "&")` means: "Find all the occurances of '&amp;' and replace it with '&'."
+
+
+##### `account.html`
+Change 
+```html
+<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="codingwithmitch logo" id="id_profile_image" src="{{profile_image}}">
+```
+To
+```html
+<img class="d-block border border-dark rounded-circle img-fluid mx-auto profile-image" alt="codingwithmitch logo" id="id_profile_image" src="{% static 'codingwithmitch/dummy_image.png' %}">
+```
+
+And down at the bottom make sure to preload the image.
+```javascript
+preloadImage("{{profile_image|safe}}", 'id_profile_image')
+````
+
+
 #### Push code changes to remote
 ```git
 git add .
