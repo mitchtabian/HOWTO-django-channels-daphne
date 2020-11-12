@@ -243,6 +243,33 @@ DEFAULT_FROM_EMAIL = 'CodingWithMitch Team <noreply@codingwithmitch.com>'
 BASE_URL = "http://<ip_from_digital_ocean>"
 ```
 
+#### manage.py
+```
+#!/usr/bin/env python
+"""Django's command-line utility for administrative tasks."""
+import os
+import sys
+from decouple import config
+
+
+def main():
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'{config("PROJECT_NAME")}.settings')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError(
+            "Couldn't import Django. Are you sure it's installed and "
+            "available on your PYTHONPATH environment variable? Did you "
+            "forget to activate a virtual environment?"
+        ) from exc
+    execute_from_command_line(sys.argv)
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
 #### Create settings.ini file in root directory
 ```
 [settings]
@@ -270,6 +297,18 @@ PROJECT_NAME=CodingWithMitchChat
 ```javascript
 var ws_path = ws_scheme + '://' + window.location.host + ":8001/"; // PRODUCTION
 ````
+
+#### Update base.html
+I forgot to add jQuery. You can get it here [https://cdnjs.com/libraries/jquery](https://cdnjs.com/libraries/jquery). Or just add this to `base.html` in the "body" section. **Do not get it from https://getbootstrap.com/**. They have the *slim* version which is not what we want.
+```html
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
+```
+
+#### Add default_profile_image.png to `/static/`
+Inside `/media_cdn/` is a file named `default_profile_image.png`. Move that into `/static/`.
+
 
 #### Remove unnecessary directories
 1. Delete `/static_cdn/`
@@ -544,11 +583,13 @@ defined in the ASGI_APPLICATION setting.
 
 import os
 import django
+from decouple import config
 from channels.routing import get_default_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CodingWithMitchChat.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", f'{config("PROJECT_NAME")}.settings')
 django.setup()
 application = get_default_application()
+
 ```
 
 `CTRL+D` to save.
@@ -805,8 +846,14 @@ sudo certbot --nginx -d open-chat-demo.xyz -d www.open-chat-demo.xyz
 
 `sudo systemctl status certbot.timer`
 
-## Test renewal process
+#### Test renewal process
 `sudo certbot renew --dry-run`
+
+You should see this
+<div class="row  justify-content-center">
+  <img class="img-fluid text-center" src = "https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/verify_certbot.PNG">
+</div>
+<br>
 
 #### Update CORS in digital ocean
 Update for HTTPS in spaces settings
@@ -821,24 +868,15 @@ Set `BASE_URL` variable in `settings.py` to your domain name.
 
 
 ## Update nginx config
-We need to tell nginx to allow websocket data to move through port 8001. I'm not really sure how to explain this. I don't understand it fully.
+We need to tell nginx to allow websocket data to move through port 8001. I'm not really sure how to explain this. I don't understand it fully. Similar to how we allow gunicorn to proxy pass nginx.
 
 Navigate to `/etc/nginx/sites-available`
 
 Update `CodingWithMitchChat`
 ```
 server {
-    server_name 167.99.187.167 open-chat.xyz www.open-chat.xyz;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/django/CodingWithMitchChat/src;
-    }
-    
-     location / {
-        include proxy_params;
-        proxy_pass http://unix:/run/gunicorn.sock;
-    }
+    ...
     
     location /ws/ {
         proxy_http_version 1.1;
@@ -848,12 +886,7 @@ server {
         proxy_pass http://127.0.0.1:8001;
     }
 
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/open-chat.xyz/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/open-chat.xyz/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
+    ...
 }
 ```
 
@@ -872,7 +905,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/home/django/CodingWithMitchChat/src
-ExecStart=/home/django/CodingWithMitchChat/venv/bin/python /home/django/CodingWithMitchChat/venv/bin/daphne -e ssl:8001:privateKey=/etc/letsencrypt/live/open-chat.xyz/privkey.pem:certKey=/etc/letsencrypt/live/open-chat.xyz/fullchain.pem CodingWithMitchChat.asgi:application  
+ExecStart=/home/django/CodingWithMitchChat/venv/bin/python /home/django/CodingWithMitchChat/venv/bin/daphne -e ssl:8001:privateKey=/etc/letsencrypt/live/open-chat-demo.xyz/privkey.pem:certKey=/etc/letsencrypt/live/open-chat-demo.xyz/fullchain.pem CodingWithMitchChat.asgi:application  
 Restart=on-failure
 
 [Install]
@@ -880,16 +913,32 @@ WantedBy=multi-user.target
 ```
 
 
-#### CORS issue?
-error in web console "No 'Access-Control-Allow-Origin' header is present on the requested resource"
-Fix this by adding CORS header in spaces settings.
-See `https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.PNG`
+# Create a superuser
+Before you test the server create a superuser.
+
+`su django`
+
+`cd /home/django/CodingWithMitchChat/`
+
+`source venv/bin/activate`
+
+`cd src`
+
+`python manage.py createsuperuser`
+
+
+# Finishing up
+Restart the server and visit your website to try it out. Everything should be working now.
+
+**If you followed my course remember to create a public chat room from the admin with the title "General".**
+
+Thanks for reading and feel free to contribute to this document if you have a better way of explaining things. I am by no means a web expert. 
 
 
 # FAQ
 Here are some things I wish I knew when doing this for the first time.
 
-#### If you change a file or pull a code update to the project, do you need to do anything?
+### If you change a file or pull a code update to the project, do you need to do anything?
 Yes.
 
 If you only change code that is *not related to django channels* then you only need to run `service gunicorn restart`.
@@ -903,7 +952,7 @@ service daphne restart
 ```
 <br>
 
-#### Service Status Errors
+### Service Status Errors
 Throughout this document we periodically check the status of the services that we set up. Things like:
 1. `sudo systemctl status gunicorn`
 1. `sudo systemctl status redis`
@@ -915,6 +964,12 @@ If any of these fail, it's not going to work and you've done something wrong. Th
 
 When you make a change to a `.service` file, **Always run `sudo systemctl daemon-reload`**. Or to be safe, just restart the damn server `sudo shutdown -r now`. Restarting the server is the safe way, but also the slowest way. 
 
+
+### CORS error in web console
+You are getting an error in web console saying: "No 'Access-Control-Allow-Origin' header is present on the requested resource".
+
+Fix this by adding CORS header in spaces settings.
+See [This image](https://github.com/mitchtabian/HOWTO-django-channels-daphne/blob/master/images/CORS.PNG) for the configuration.
 
 # References
 1. [https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04)
