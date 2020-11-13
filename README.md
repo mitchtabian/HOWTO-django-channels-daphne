@@ -341,7 +341,7 @@ This `requirements.txt` file has some extra dependencies that we didn't have in 
 
 
 #### A Problem with how Django interprets static files in javascript
-This is a weird thing that happens if you set static files in javascript with django. HTML symbols get tranlated into their respective code. 
+This is a weird thing that happens if you set static files in javascript with django. HTML symbols get translated into their respective code. 
 
 Example
 ```
@@ -411,9 +411,7 @@ Open MobaXterm and log into your server via SSH.
 
 `git init`
 
-`git pull https://github.com/mitchtabian/Codingwithmitch-Chat.git` **Or whatever your git url is**
-
-`git pull origin prod`
+`git pull https://github.com/mitchtabian/Codingwithmitch-Chat.git prod` **Or whatever your git url is**
 
 `pip install -r requirements.txt`
 
