@@ -223,6 +223,18 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 Bottom of the file:
 ```python
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config("DB_NAME"),
+        'USER': config("DB_USER"),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
@@ -286,13 +298,17 @@ if __name__ == '__main__':
 ```
 [settings]
 DEBUG=False
-SECRET_KEY=<your secret key>
+SECRET_KEY=e9lgp7glzo&n(l3v&jkwhyt8ye*!o=cwh7y6o@b2a^$muup!#1
 
-AWS_ACCESS_KEY_ID=<your access key>
-AWS_SECRET_ACCESS_KEY=<your secret access key>
-AWS_STORAGE_BUCKET_NAME=open-chat-dev
+AWS_ACCESS_KEY_ID=AHPYOBHNGF4FSKE2TXD7
+AWS_SECRET_ACCESS_KEY=FJ/i1oP13VJQTj6xZhNnbB6p0jdTGiW0G9va6IkXj58
+AWS_STORAGE_BUCKET_NAME=open-chat-xyz-demo
 AWS_S3_ENDPOINT_URL=https://nyc3.digitaloceanspaces.com
 AWS_LOCATION=open-chat-static
+
+DB_NAME=django_db
+DB_USER=django
+DB_PASSWORD=password
 
 EMAIL_HOST_USER=<some-email@gmail.com>
 EMAIL_HOST_PASSWORD=<password>
@@ -451,7 +467,7 @@ We've tested to see if the application will run if we run the app manually, but 
 
 One way you can do this is with gunicorn. Run this command you'll see that gunicorn can run the application:
 ```
-gunicorn --bind 0.0.0.0:8000 ChatServerPlayground.wsgi
+gunicorn --bind 0.0.0.0:8000 CodingWithMitchChat.wsgi
 ```
 
 visit [http://<your_ip_address>:8000/](http://<your_ip_address>:8000/)
