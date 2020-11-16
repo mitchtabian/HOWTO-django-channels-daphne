@@ -21,6 +21,8 @@ Everything involved in publishing a django website equipped with WebSockets usin
 
 I use [Digital Ocean](https://m.do.co/c/c87161ed324c) as the hosting provider. They have amazing products, documentation and customer support. I highly recommend them. Get $100 free with this referral link: [Get $100 Free some Digital Ocean](https://m.do.co/c/c87161ed324c).
 
+**Keep in mind** this document is meant to be followed after watching my course where I show you how to build a real-time chat website. You can check out the course here: [Real-time Chat Messenger course](https://codingwithmitch.com/courses/real-time-chat-messenger/).
+
 ## Specifications
 1. Ubuntu 20.04
 1. PostgreSQL
