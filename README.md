@@ -959,7 +959,7 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_redirect off;
-        proxy_pass http://127.0.0.1:8001;
+        proxy_pass http://0.0.0.0:8001;
     }
 
     ...
